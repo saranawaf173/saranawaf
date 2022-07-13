@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>الصفحة الرئيسية</title>
+    <style>
+        .head{
+            width: 100%;
+            height: 80px;
+            background-color: #3d3d3d;
+            border-radius: 8px;
+            color: white;
+            font-size: 50px;
+            padding-top: 10px;
+        }
+        #p {
+            font-size: 45px;
+            color: #333333;
+        }
+        .btn{
+            margin-top: 80px;
+        }
+        .btn button{
+            padding: 10px 30px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<script>
+    function reco(){
+    var speech = true;
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const speech_recognition = new SpeechRecognition();
+    speech_recognition.interimResults = true;
+    const rec_phase = document.querySelector('.rec_phase');
+    rec_phase.appendChild(p);
+    speech_recognition.addEventListener('result', e => {
+        const transcript = Array.from(e.results)
+            .map(result => result[0])
+            .map(result => result.transcript)
+            .join('')
+
+        document.getElementById("p").innerHTML = transcript;
+    });
+        speech_recognition.start();
+    }
+
+</script>
+<body dir="rtl">
+    <div class="head" align="center">
+        تحويل الصوت الى نص
+    </div>
+    <div class="btn" align="center">
+        <button onclick="reco()">إبدأ التعرف</button>
+    </div>
+    <div class="rec_phase" align="center" contenteditable>
+        <p id="p"></p>
+    </div>
+</body>
+  
+</html>
